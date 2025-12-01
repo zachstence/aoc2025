@@ -31,7 +31,13 @@ const part2 = (rawInput: string) => {
 
   for (const rotation of input) {
     const mult = rotation.direction === "L" ? -1 : 1;
-    for (let i = 0; i < rotation.amount; i++) {
+
+    let amount = rotation.amount;
+    const numFullRotations = Math.floor(amount / 100);
+    zeroCount += numFullRotations;
+    amount = modulo(amount, 100);
+
+    for (let i = 0; i < amount; i++) {
       position = modulo(position + mult * 1, 100);
       if (position === 0) zeroCount++;
     }
