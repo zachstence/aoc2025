@@ -26,7 +26,18 @@ const part1 = (rawInput: string) => {
 const part2 = (rawInput: string) => {
   const input = parseInput(rawInput);
 
-  return;
+  let position = 50;
+  let zeroCount = 0;
+
+  for (const rotation of input) {
+    const mult = rotation.direction === "L" ? -1 : 1;
+    for (let i = 0; i < rotation.amount; i++) {
+      position = modulo(position + mult * 1, 100);
+      if (position === 0) zeroCount++;
+    }
+  }
+
+  return zeroCount.toString();
 };
 
 run({
@@ -51,10 +62,20 @@ L82
   },
   part2: {
     tests: [
-      // {
-      //   input: ``,
-      //   expected: "",
-      // },
+      {
+        input: `L68
+L30
+R48
+L5
+R60
+L55
+L1
+L99
+R14
+L82
+`,
+        expected: "6",
+      },
     ],
     solution: part2,
   },
