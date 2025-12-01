@@ -29,3 +29,6 @@
  *     import { myUtil } from '../utils'
  *
  */
+
+export const modulo = (num: number, base: number): number =>
+  ((num % base) + base) % base;
