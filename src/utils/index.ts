@@ -32,3 +32,14 @@
 
 export const modulo = (num: number, base: number): number =>
   ((num % base) + base) % base;
+
+export const getDivisors = (num: number): number[] => {
+  const divisors: number[] = [];
+  for (let i = 1; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) {
+      divisors.push(i);
+      divisors.push(num / i);
+    }
+  }
+  return divisors.sort();
+};
