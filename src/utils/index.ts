@@ -43,3 +43,16 @@ export const getDivisors = (num: number): number[] => {
   }
   return divisors.sort();
 };
+
+export const findMax = (arr: number[]): { max: number; index: number } => {
+  return arr.reduce<{ max: number; index: number }>(
+    (acc, battery, i) => {
+      if (battery > acc.max) {
+        acc.max = battery;
+        acc.index = i;
+      }
+      return acc;
+    },
+    { max: -Infinity, index: -1 },
+  );
+};
