@@ -24,7 +24,22 @@ const part1 = (rawInput: string) => {
 const part2 = (rawInput: string) => {
   const input = parseInput(rawInput);
 
-  return;
+  let sum = 0;
+
+  for (const bank of input) {
+    let numStr = "";
+    let startIndex = 0;
+    for (let i = 0; i < 12; i++) {
+      const endIndex = bank.length - (12 - i) + 1;
+      const result = findMax(bank.slice(startIndex, endIndex));
+      numStr += result.max.toString();
+      startIndex = startIndex + result.index + 1;
+    }
+
+    sum += parseInt(numStr);
+  }
+
+  return sum.toString();
 };
 
 run({
@@ -44,10 +59,15 @@ run({
   },
   part2: {
     tests: [
-      // {
-      //   input: ``,
-      //   expected: "",
-      // },
+      {
+        input: `
+987654321111111
+811111111111119
+234234234234278
+818181911112111
+`,
+        expected: "3121910778619",
+      },
     ],
     solution: part2,
   },
